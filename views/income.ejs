@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Tracker</title>
+    <link rel="stylesheet" href="/css/sample.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Total Income Section -->
+        <div class="total-in">
+            <h1>Total Income: <%= typeof totalIncome !== 'undefined' ? totalIncome : 0 %></h1>
+        </div>
+        
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-section">
+                <h2 class="subHheadings">Add Income</h2>
+                <form action="/add-income" method="POST">
+                    <label for="salary-type">Salary Type:</label>
+                    <input type="text" id="salary-type" name="salaryType" required>
+
+                    <label for="salary-amount">Amount:</label>
+                    <input type="number" id="salary-amount" name="salaryAmount" step="0.01" required>
+
+                    <label for="income-date">Date:</label>
+                    <input type="date" id="income-date" name="incomeDate" required>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="3" required></textarea>
+
+                    <button type="submit" id="addIncomebtn">Add Income</button>
+                </form>
+            </div>
+
+            <!-- Incomes List Section -->
+            <div class="incomes-list">
+                <h2 class="subHheadings">Previous Incomes</h2>
+                <ul>
+                    <% incomes.forEach(function(income) { %>
+                        <li>
+                            <div class="income-item">
+                                <span><strong>Type:</strong> <%= income.salaryType %></span>
+                                <span><strong>Amount:</strong> <%= income.salaryAmount %></span>
+                                <span><strong>Date:</strong> <%= new Date(income.incomeDate).toLocaleDateString() %></span>
+                                <span><strong>Description:</strong> <%= income.description %></span>
+                                <!-- <a href="/delete-income/<%= income.id %>" class="delete-icon" title="Delete">&#x1F5D1;</a> -->
+
+                                <form action="/delete-income/<%= income.id %>" method="POST">
+                                    <button class="delete-icon" title="Delete">&#x1F5D1;</button>
+                                 </form>
+                                 
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+form input {
+    padding: 10px;
+    margin-right: 10px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #5ae15f;
+    /* background-color: rgb(224, 167, 63); */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+#deleteExpencebtn{
+    background-color: rgb(230, 62, 62);
+    border-radius: 5px;
+}
+.subHheadings{
+    color: rgb(240, 178, 61);
+    font-size: 1.8rem;
+    padding: 5px;
+}
+.pageFooter{
+    padding: 1.3rem;
+    background-color: skyblue;
+    display: flex;
+    gap: 12px;
+}
+.arrow{
+    cursor: pointer;
+}

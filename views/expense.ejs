@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+    
+    <div class="container">
+        <h1 class="subHheadings">Expense Tracker</h1>
+
+        <!-- Form to add new expense -->
+        <form action="/add-expense" method="POST">
+            <input type="date" name="date" required>
+            <input type="text" name="category" placeholder="Category" required>
+            <input type="text" name="description" placeholder="Description">
+            <input type="number" name="amount" placeholder="Amount" required>
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <!-- Display the list of expenses -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% expenses.forEach(expense => { %>
+                    <tr>
+                        <td><%= expense.date %></td>
+                        <td><%= expense.category %></td>
+                        <td><%= expense.description %></td>
+                        <td><%= expense.amount %></td>
+                        <td>
+                            <form action="/delete-expense/<%= expense.id %>" method="POST">
+                                <button type="submit" id="deleteExpencebtn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <div class="pageFooter">
+
+            <i class="fa fa-arrow-left arrow"  id="prevArr"  style="font-size:30px;" ></i>
+            <div id="pageindex">
+                
+            </div>
+            <i class="fa fa-arrow-right  arrow" id="nextArr" style="font-size:30px;"></i>
+           </div>
+    </div>
+  
+
+    <script>
+        let pageInd= 1;
+        const maxInd=5;
+        const pageindex= document.getElementById("pageindex");
+        const prevArr= document.getElementById("prevArr");
+        const nextArr= document.getElementById("nextArr");
+        pageindex.innerHTML=pageInd;
+
+        prevArr.addEventListener("click",prevPage);
+        nextArr.addEventListener("click",nextPage);
+
+        async function changePage(){
+            let exp =await fetch('http://localhost:3001/csexpenses?page=0&pagesize=10');
+        }
+
+
+        function nextPage(){
+            if(pageInd===maxInd)return;
+            pageInd= pageInd+1;
+            pageindex.innerHTML=pageInd;
+            changePage();
+        }
+        function prevPage(){
+            if(pageInd===1)return;
+            pageInd= pageInd-1;
+            pageindex.innerHTML=pageInd;
+            changePage();
+        }
+    </script>
+</body>
+</html>
